@@ -23,12 +23,6 @@ install:
 - CURRENT_DIR=`pwd`
 - source ./scripts/build.sh
 - do_it
-- cd $CURRENT_DIR
-- echo $TRAVIS_TEST_RESULT
-- npm install --fallback-to-build=false
-- echo $TRAVIS_TEST_RESULT
-# TODO - unpublish binary if failure https://github.com/springmeyer/node-pre-gyp/issues/21
-- if [ $? != 0 ]; then echo 'failed'; else echo 'worked'; fi
 
 before_script:
 - echo "before_script"
