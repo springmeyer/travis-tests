@@ -21,7 +21,8 @@ before_install:
 
 install:
 - CURRENT_DIR=`pwd`
-- source ./util/build.sh
+- source ./scripts/build.sh
+- do_it
 - cd $CURRENT_DIR
 
 before_script:
@@ -32,3 +33,9 @@ script:
 
 after_success:
 - echo "after_success"
+- echo $TRAVIS_COMMIT
+- COMMIT_MESSAGE=$(git show -s --format=%B $TRAVIS_COMMIT | tr -d '\n')
+- echo $COMMIT_MESSAGE
+- if test "${COMMIT_MESSAGE#*[publish]}" != "$COMMIT_MESSAGE"; then echo 'publish'; fi
+- if test "${COMMIT_MESSAGE#*[publish-binary]}" != "$COMMIT_MESSAGE"; then echo 'publish-binary'; fi
+- if [[ `git describe --contains $( git rev-parse HEAD )` ]]; then echo 'yes it\'s a tag'; fi;
