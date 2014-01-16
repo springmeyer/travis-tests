@@ -15,7 +15,7 @@ env:
    - NODE_CURRENT_VERSION="0.8"
 
 before_install:
-- set -x -u -e
+#- set -x -u -e
 - scripts/setup_node.sh
 - scripts/show_env.sh
 
@@ -38,4 +38,4 @@ after_success:
 - echo $COMMIT_MESSAGE
 - if test "${COMMIT_MESSAGE#*[publish]}" != "$COMMIT_MESSAGE"; then echo 'publish'; fi
 - if test "${COMMIT_MESSAGE#*[publish-binary]}" != "$COMMIT_MESSAGE"; then echo 'publish-binary'; fi
-- if [[ `git describe --contains $( git rev-parse HEAD )` ]]; then echo 'yes it\'s a tag'; fi;
+- if [[ `git describe --contains $( git rev-parse HEAD )` ]]; then echo 'a tag'; fi;
