@@ -27,7 +27,7 @@ install:
 before_script:
 - echo "before_script"
 - echo $TRAVIS_TEST_RESULT
-- TEST=$(npm install --fallback-to-build=false)$?
+- TEST=$(npm install --fallback-to-build=false)$? || true
 # TODO - unpublish binary if failure https://github.com/springmeyer/node-pre-gyp/issues/21
 - if [ $? != 0 ]; then echo 'failed2'; else echo 'worked2'; fi
 - echo $TEST
