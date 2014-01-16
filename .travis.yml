@@ -29,9 +29,12 @@ before_script:
 - echo "before_script"
 
 script:
-- echo "script"
+- npm install --fallback-to-build=false
+# TODO - unpublish binary if failure https://github.com/springmeyer/node-pre-gyp/issues/21
+- if [ $? != 0 ]; then echo 'failed'; else echo 'worked'; fi
 
 after_success:
+- if [ $? != 0 ]; then echo 'failed2'; else echo 'worked2'; fi
 - echo "after_success"
 - echo $TRAVIS_COMMIT
 - COMMIT_MESSAGE=$(git show -s --format=%B $TRAVIS_COMMIT | tr -d '\n')
