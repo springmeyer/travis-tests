@@ -1,0 +1,34 @@
+language: cpp
+#language: objective-c
+
+git:
+  depth: 0
+
+# not yet available for public repos: http://about.travis-ci.org/docs/user/caching/
+#cache:
+#  directories:
+#  - node_modules
+
+env:
+  matrix:
+   - NODE_CURRENT_VERSION="0.10"
+   - NODE_CURRENT_VERSION="0.8"
+
+before_install:
+- set -x -u -e
+- scripts/setup_node.sh
+- scripts/show_env.sh
+
+install:
+- CURRENT_DIR=`pwd`
+- source ./util/build.sh
+- cd $CURRENT_DIR
+
+before_script:
+- echo "before_script"
+
+script:
+- echo "script"
+
+after_success:
+- echo "after_success"
