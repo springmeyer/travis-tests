@@ -2,7 +2,7 @@ language: cpp
 #language: objective-c
 
 git:
-  depth: 0
+  depth: 1
 
 # not yet available for public repos: http://about.travis-ci.org/docs/user/caching/
 #cache:
