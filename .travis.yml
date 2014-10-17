@@ -44,6 +44,8 @@ after_success:
 - echo $TRAVIS_COMMIT
 - COMMIT_MESSAGE=$(git show -s --format=%B $TRAVIS_COMMIT | tr -d '\n')
 - echo $COMMIT_MESSAGE
-- if test "${COMMIT_MESSAGE#*[publish]}" != "$COMMIT_MESSAGE"; then echo 'publish'; fi
-- if test "${COMMIT_MESSAGE#*[publish-binary]}" != "$COMMIT_MESSAGE"; then echo 'publish-binary'; fi
+- if test "${COMMIT_MESSAGE#*'[publish]'}" != "$COMMIT_MESSAGE"; then  echo 'publish'; fi
+- if [[ ${COMMIT_MESSAGE} =~ "[publish]" ]]; then echo yes; fi;
+- if test "${COMMIT_MESSAGE#*'[publish binary]'}" != "$COMMIT_MESSAGE"; then  echo 'publish-binary'; fi
+- if [[ ${COMMIT_MESSAGE} =~ "[publish binary]" ]]; then echo yes; fi;
 - if [[ `git describe --contains $( git rev-parse HEAD )` ]]; then echo 'a tag'; fi;
