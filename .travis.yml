@@ -7,7 +7,7 @@ git:
   depth: 1
 
 before_install:
-- set -eu
+- set -e
 - set -o pipefail
 - echo "before install"
 - time brew remove --force $(brew list)
