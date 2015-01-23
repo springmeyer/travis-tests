@@ -1,51 +1,27 @@
-language: cpp
-#language: objective-c
+#language: cpp
+language: objective-c
+
+sudo: false
 
 git:
   depth: 1
 
-# not yet available for public repos: http://about.travis-ci.org/docs/user/caching/
-#cache:
-#  directories:
-#  - node_modules
-
-env:
-  matrix:
-   - NODE_CURRENT_VERSION="0.10"
-   - NODE_CURRENT_VERSION="0.8"
-
 before_install:
-#- set -x -u -e
-- scripts/setup_node.sh
-- scripts/show_env.sh
+- set -eu
+- set -o pipefail
+- echo "before install"
+- time brew remove --force $(brew list)
 
 install:
-- CURRENT_DIR=`pwd`
-- source ./scripts/build.sh
-- do_it
+- env
+- echo "install"
 
 before_script:
 - echo "before_script"
-- echo $TRAVIS_TEST_RESULT
-- TEST=$(npm install --fallback-to-build=false)$? || true
-# TODO - unpublish binary if failure https://github.com/springmeyer/node-pre-gyp/issues/21
-- if [ $? != 0 ]; then echo 'failed2'; else echo 'worked2'; fi
-- echo $TEST
-- echo $TRAVIS_TEST_RESULT
 
 script:
 - echo "script"
-# TODO - unpublish binary if failure https://github.com/springmeyer/node-pre-gyp/issues/21
-- if [ $? != 0 ]; then echo 'failed3'; else echo 'worked3'; fi
 
 after_success:
-- if [ $? != 0 ]; then echo 'failed4'; else echo 'worked4'; fi
+- if [ $? != 0 ]; then echo 'failed'; else echo 'worked'; fi
 - echo "after_success"
-- echo $TRAVIS_COMMIT
-- COMMIT_MESSAGE=$(git show -s --format=%B $TRAVIS_COMMIT | tr -d '\n')
-- echo $COMMIT_MESSAGE
-- if test "${COMMIT_MESSAGE#*'[publish]'}" != "$COMMIT_MESSAGE"; then  echo 'publish'; fi
-- if [[ ${COMMIT_MESSAGE} =~ "[publish]" ]]; then echo yes; fi;
-- if test "${COMMIT_MESSAGE#*'[publish binary]'}" != "$COMMIT_MESSAGE"; then  echo 'publish-binary'; fi
-- if [[ ${COMMIT_MESSAGE} =~ "[publish binary]" ]]; then echo yes; fi;
-- if [[ `git describe --contains $( git rev-parse HEAD )` ]]; then echo 'a tag'; fi;
