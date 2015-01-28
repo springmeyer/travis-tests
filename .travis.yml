@@ -21,9 +21,10 @@ before_script:
 # install gdal with mason locally
 - mason install gdal 1.11.1
 # link gdal to ./mason_packages/.link
-- mason install gdal 1.11.1
+- mason link gdal 1.11.1
 # configure GDAL_DATA so projection data lookup works
 - export GDAL_DATA=$(pwd)/mason_packages/.link/share/gdal
+- ls $GDAL_DATA
 # put Mason ./bin on PATH
 - export PATH=$(pwd)/mason_packages/.link/bin:${PATH}
 
