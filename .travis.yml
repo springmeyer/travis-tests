@@ -10,8 +10,8 @@ addons:
 
 before_install:
 # do we have gdal installed already due to postgres/postgis?
-- which ogr2ogr
-- which gdalinfo
+- which ogr2ogr || echo "no ogr2ogr yet installed"
+- which gdalinfo || echo "no gdalinfo yet installed"
 
 install:
 # install mason
