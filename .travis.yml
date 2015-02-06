@@ -1,5 +1,4 @@
-#language: cpp
-language: objective-c
+language: cpp
 
 sudo: false
 
@@ -7,10 +6,11 @@ git:
   depth: 1
 
 before_install:
-- set -e
-- set -o pipefail
-- echo "before install"
-- time brew remove --force $(brew list)
+- git clone https://github.com/mapbox/mapbox-studio.git
+- cd mapbox-studio
+- gem install bundle
+- bundle install --path .bundle
+- bundle exec jekyll build --config=_config.test.yml --destination=_site-test
 
 install:
 - env
