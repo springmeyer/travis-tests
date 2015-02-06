@@ -10,7 +10,7 @@ before_install:
 - bundle install --path .bundle
 - git clone https://github.com/mapbox/mapbox-studio.git
 - cd mapbox-studio
-- bundle exec jekyll build --config=_config.test.yml --destination=_site-test
+- bundle exec jekyll build
 
 install:
 - env
