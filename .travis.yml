@@ -1,27 +1,18 @@
-#language: cpp
-language: objective-c
-
 sudo: false
 
-git:
-  depth: 1
-
-before_install:
-- set -e
-- set -o pipefail
-- echo "before install"
-- time brew remove --force $(brew list)
+# http://docs.travis-ci.com/user/apt/
+addons:
+  apt:
+    sources:
+     - llvm-toolchain-precise-3.5
+    packages:
+     - clang-3.5
 
 install:
-- env
-- echo "install"
+ - true
 
 before_script:
-- echo "before_script"
+ - true
 
 script:
-- echo "script"
-
-after_success:
-- if [ $? != 0 ]; then echo 'failed'; else echo 'worked'; fi
-- echo "after_success"
+ - true
