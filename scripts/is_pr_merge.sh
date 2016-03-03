@@ -1,10 +1,12 @@
 #!/bin/bash
 
+set -eu pipefail
+
 : '
 
 This script is designed to detect if a gitsha represents a normal
-commit (to any branch) or whether it represents travis attempting to
-merge between the origin and the upstream branch.
+push commit (to any branch) or whether it represents travis attempting
+to merge between the origin and the upstream branch.
 
 For more details see: https://docs.travis-ci.com/user/pull-requests
 
@@ -22,6 +24,4 @@ COMMIT_SHOW=$(git show -s --format=%B | tr -d '\n')
 
 if [[ ${COMMIT_LOG} != ${COMMIT_SHOW} ]]; then
    echo true
-else
-   echo false
 fi
