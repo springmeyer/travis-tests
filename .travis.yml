@@ -15,6 +15,7 @@ install:
 #- env
 - COMMIT1=$(git log --format=%B --no-merges -n 1 | tr -d '\n')
 - COMMIT2=$(git show -s --format=%B | tr -d '\n')
+- echo "${COMMIT1} - ${COMMIT2}"
 - |
   if [[ ${COMMIT1} != ${COMMIT2} ]]; then
      echo "Yes, the two commits are different - looks like merge commit"
@@ -22,7 +23,7 @@ install:
      echo "No, commits are identical - does not look like a merge commit"
   fi
 - |
-  if [[ ${COMMIT1} =~ "Merge " ]] && [[ ${COMMIT1} =~ " into " ]]; then
+  if [[ ${COMMIT2} =~ "Merge " ]] && [[ ${COMMIT2} =~ " into " ]]; then
      echo "Yes, this looks like a merge commit"
   else
      echo "No this does not look like a merge commit"
