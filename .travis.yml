@@ -28,6 +28,19 @@ install:
   else
      echo "No this does not look like a merge commit"
   fi
+- scripts/is_pr_merge.sh
+- |
+  if [[ $(./scripts/is_pr_merge.sh) ]]; then
+     echo "yes, via script"
+  else
+     echo "no, via script"
+  fi
+- |
+  if [[ $(./scripts/is_pr_merge.sh) == true ]]; then
+     echo "yes 2, via script"
+  else
+     echo "no 2, via script"
+  fi
 
 before_script:
 - echo "before_script"
