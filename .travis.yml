@@ -7,21 +7,26 @@ git:
   depth: 1
 
 before_install:
-- set -e
-- set -o pipefail
+#- set -e
+#- set -o pipefail
 - echo "before install"
-- time brew remove --force $(brew list)
 
 install:
-- env
-- echo ${TRAVIS_PULL_REQUEST}
-- echo ${TRAVIS_BRANCH}
-- echo ${TRAVIS_BUILD_ID}
-- echo ${TRAVIS_COMMIT}
-- git log --format=%B --no-merges -n 1
-- git show -s --format=%B ${TRAVIS_COMMIT}
-- git show -s --format=%B
-- echo "install"
+#- env
+- COMMIT1=$(git log --format=%B --no-merges -n 1 | tr -d '\n')
+- COMMIT2=$(git show -s --format=%B | tr -d '\n')
+- |
+  if [[ ${COMMIT1} != ${COMMIT2} ]]; then
+     echo "Yes, the two commits are different - looks like merge commit"
+  else
+     echo "No, commits are identical - does not look like a merge commit"
+  if
+- |
+  if [[ ${COMMIT1} =~ "Merge " ]] && [[ ${COMMIT1} =~ " into " ]]; then
+     echo "Yes, this looks like a merge commit"
+  else
+     echo "No this does not look like a merge commit"
+  if
 
 before_script:
 - echo "before_script"
