@@ -20,13 +20,13 @@ install:
      echo "Yes, the two commits are different - looks like merge commit"
   else
      echo "No, commits are identical - does not look like a merge commit"
-  if
+  fi
 - |
   if [[ ${COMMIT1} =~ "Merge " ]] && [[ ${COMMIT1} =~ " into " ]]; then
      echo "Yes, this looks like a merge commit"
   else
      echo "No this does not look like a merge commit"
-  if
+  fi
 
 before_script:
 - echo "before_script"
