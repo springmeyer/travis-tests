@@ -7,6 +7,8 @@ git:
   depth: 1
 
 before_install:
+- mdutil -s /
+- mdutil -a
 - set -e
 - set -o pipefail
 - echo "before install"
