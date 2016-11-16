@@ -1,18 +1,26 @@
-#language: cpp
-language: objective-c
-
-sudo: false
-
-git:
-  depth: 1
+matrix:
+  include:
+    - os: linux
+      sudo: false
+      dist: precise
+      language: node_js
+      node_js: 4
+    - os: linux
+      sudo: false
+      dist: trusty
+      language: node_js
+      node_js: 4
+    - os: linux
+      sudo: required
+      dist: trusty
+      language: node_js
+      node_js: 4
+    - os: osx
+      language: node_js
+      node_js: 4
 
 before_install:
-- mdutil -s /
-- mdutil -a
-- set -e
-- set -o pipefail
 - echo "before install"
-- time brew remove --force $(brew list)
 
 install:
 - env
@@ -23,6 +31,7 @@ before_script:
 
 script:
 - echo "script"
+- node -e "console.log(require('os').cpus())"
 
 after_success:
 - if [ $? != 0 ]; then echo 'failed'; else echo 'worked'; fi
