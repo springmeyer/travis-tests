@@ -5,19 +5,23 @@ matrix:
       dist: precise
       language: node_js
       node_js: 4
+      env: TYPE="docker precise"
     - os: linux
       sudo: false
       dist: trusty
       language: node_js
       node_js: 4
+      env: TYPE="docker trusty"
     - os: linux
       sudo: required
       dist: trusty
       language: node_js
       node_js: 4
+      env: TYPE="legacy trusty"
     - os: osx
       language: node_js
       node_js: 4
+      env: TYPE="osx"
 
 before_install:
 - echo "before install"
