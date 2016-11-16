@@ -31,6 +31,7 @@ before_script:
 
 script:
 - echo "script"
+- node -e "console.log(require('os').cpus().length)"
 - node -e "console.log(require('os').cpus())"
 
 after_success:
