@@ -36,6 +36,7 @@ before_script:
 script:
 - echo "script"
 - node -e "console.log(require('os').cpus().length)"
+- python -c 'import multiprocessing;print(multiprocessing.cpu_count())'
 - node -e "console.log(require('os').cpus())"
 
 after_success:
