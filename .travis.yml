@@ -1,29 +1,27 @@
-#language: cpp
-language: objective-c
+language: generic
 
 sudo: false
 
 git:
   depth: 1
 
-before_install:
-- mdutil -s /
-- mdutil -a
-- set -e
-- set -o pipefail
-- echo "before install"
-- time brew remove --force $(brew list)
-
-install:
-- env
-- echo "install"
-
-before_script:
-- echo "before_script"
-
 script:
-- echo "script"
+  - sudo dmidecode -t 4 || true
+  - cat /proc/cpuinfo || true
+  - lscpu || true
+  - sudo apt-get install cpuid
 
-after_success:
-- if [ $? != 0 ]; then echo 'failed'; else echo 'worked'; fi
-- echo "after_success"
+matrix:
+  include:
+     - os: linux
+       dist: precise
+       sudo: true
+     - os: linux
+       dist: trusty
+       sudo: true
+     - os: linux
+       dist: precise
+       sudo: false
+     - os: linux
+       dist: trusty
+       sudo: false
