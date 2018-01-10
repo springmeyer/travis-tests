@@ -3,7 +3,7 @@ language: generic
 script:
   - curl -O https://bootstrap.pypa.io/get-pip.py
   - sudo python get-pip.py
-  - sudo pip install -q awscli
+  - pip install awscli --user
   - aws || true
 
 matrix:
