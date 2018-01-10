@@ -1,27 +1,10 @@
 language: generic
 
-sudo: false
-
-git:
-  depth: 1
-
 script:
-  - sudo dmidecode -t 4 || true
-  - cat /proc/cpuinfo || true
-  - lscpu || true
-  - sudo apt-get install cpuid
+  - curl -O https://bootstrap.pypa.io/get-pip.py
+  - python get-pip.py
+  - pip install -q awscli
 
 matrix:
   include:
-     - os: linux
-       dist: precise
-       sudo: true
-     - os: linux
-       dist: trusty
-       sudo: true
-     - os: linux
-       dist: precise
-       sudo: false
-     - os: linux
-       dist: trusty
-       sudo: false
+     - os: osx
