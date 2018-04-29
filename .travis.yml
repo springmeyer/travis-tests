@@ -1,5 +1,7 @@
 language: generic
 
+sudo: required
+
 install:
  - mkdir ./mason
  - curl -sSfL https://github.com/mapbox/mason/archive/master.tar.gz | tar --gunzip --extract --strip-components=1 --exclude="*md" --exclude="test*" --directory=./mason
@@ -7,11 +9,9 @@ install:
  - ./mason/mason link perf 4.16
 
 script:
- - ./mason_packages/.link/bin/perf stat -a -- sleep 5
+ - sudo ./mason_packages/.link/bin/perf stat -a -- sleep 5
 
 matrix:
   include:
     - os: linux
-      sudo: false
-    - os: linux
-      sudo: required
+      
