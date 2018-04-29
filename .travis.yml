@@ -1,29 +1,17 @@
-#language: cpp
-language: objective-c
-
-sudo: false
-
-git:
-  depth: 1
-
-before_install:
-- mdutil -s /
-- mdutil -a
-- set -e
-- set -o pipefail
-- echo "before install"
-- time brew remove --force $(brew list)
+language: generic
 
 install:
-- env
-- echo "install"
-
-before_script:
-- echo "before_script"
+ - mkdir ./mason
+ - curl -sSfL https://github.com/mapbox/mason/archive/master.tar.gz | tar --gunzip --extract --strip-components=1 --exclude="*md" --exclude="test*" --directory=./mason
+ - ./mason/mason install perf 4.16
+ - ./mason/mason link perf 4.16
 
 script:
-- echo "script"
+ - ./mason_packages/.link/bin/perf stat -a -- sleep 5
 
-after_success:
-- if [ $? != 0 ]; then echo 'failed'; else echo 'worked'; fi
-- echo "after_success"
+matrix:
+  include:
+    - os: linux
+      sudo: false
+    - os: linux
+      sudo: required
