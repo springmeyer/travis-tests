@@ -1,17 +1,15 @@
-language: generic
-
-sudo: required
-
-install:
- - mkdir ./mason
- - curl -sSfL https://github.com/mapbox/mason/archive/master.tar.gz | tar --gunzip --extract --strip-components=1 --exclude="*md" --exclude="test*" --directory=./mason
- - ./mason/mason install perf 4.16
- - ./mason/mason link perf 4.16
-
-script:
- - sudo ./mason_packages/.link/bin/perf stat -a -- sleep 5
+language: node_js
 
 matrix:
   include:
+     # Clang tidy build
     - os: linux
-      
+      sudo: false
+      node_js: 4
+      dist: xenial
+
+
+install:
+ - npm install
+ - node -e "console.log(require.resolve('@mapbox/mapbox-gl-native'))" || true
+ - node -e "require('@mapbox/mapbox-gl-native')" || true
