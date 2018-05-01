@@ -8,6 +8,11 @@ matrix:
       node_js: 4
       dist: xenial
 
+# enable c++11/14 builds
+addons:
+  apt:
+    sources: [ 'ubuntu-toolchain-r-test' ]
+    packages: [ 'libstdc++-6', 'libgles2-mesa', 'libsdl2-dev' ]
 
 install:
  - npm install
