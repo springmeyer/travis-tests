@@ -6,7 +6,7 @@ matrix:
     - os: linux
       sudo: false
       node_js: 4
-      dist: xenial
+      dist: trusty
 
 # enable c++11/14 builds
 addons:
