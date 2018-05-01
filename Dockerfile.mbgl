@@ -1,0 +1,15 @@
+FROM ubuntu:xenial-20171006
+
+# docker build -t mbgl -f Dockerfile.mbgl .
+# docker run -it mbgl bash
+
+# install && clean up
+RUN apt-get update -qq && \
+    apt-get install -y curl && \
+    curl https://nodejs.org/dist/v4.8.7/node-v4.8.7-linux-x64.tar.gz | tar zxC /usr/local --strip-components=1
+
+RUN apt-get install -y libgles2-mesa libegl1-mesa
+
+RUN npm install @mapbox/mapbox-gl-native@4.0.0-pre.2
+
+CMD node -e "require('@mapbox/mapbox-gl-native')" && node -e "console.log(require.resolve('@mapbox/mapbox-gl-native'))"

@@ -10,16 +10,29 @@ matrix:
         apt:
           sources: [ 'ubuntu-toolchain-r-test' ]
           packages: [ 'libstdc++6', 'libgles2-mesa', 'libegl1-mesa' ]
+      install:
+       - npm install
+      script:
+       - node -e "console.log(require.resolve('@mapbox/mapbox-gl-native'))"
+       - node -e "require('@mapbox/mapbox-gl-native')"
     - os: linux
       sudo: required
       node_js: 4
       dist: xenial
       before_install:
         - sudo apt-get install -y --allow-unauthenticated libstdc++6 libgles2-mesa libegl1-mesa
-
-install:
- - npm install
-
-script:
- - node -e "console.log(require.resolve('@mapbox/mapbox-gl-native'))"
- - node -e "require('@mapbox/mapbox-gl-native')"
+      install:
+       - npm install
+      script:
+       - node -e "console.log(require.resolve('@mapbox/mapbox-gl-native'))"
+       - node -e "require('@mapbox/mapbox-gl-native')"
+    - os: linux
+      sudo: required
+      node_js: 4
+      dist: trusty
+      services:
+        - docker
+      install:
+       - docker build -t mbgl -f Dockerfile.mbgl .
+      script:
+       - docker run -it mbgl
