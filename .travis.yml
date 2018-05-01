@@ -12,9 +12,11 @@ matrix:
 addons:
   apt:
     sources: [ 'ubuntu-toolchain-r-test' ]
-    packages: [ 'libstdc++-6', 'libgles2-mesa' ]
+    packages: [ 'libstdc++-6', 'libgles2-mesa', 'libegl1-mesa' ]
 
 install:
  - npm install
- - node -e "console.log(require.resolve('@mapbox/mapbox-gl-native'))" || true
- - node -e "require('@mapbox/mapbox-gl-native')" || true
+
+script:
+ - node -e "console.log(require.resolve('@mapbox/mapbox-gl-native'))"
+ - node -e "require('@mapbox/mapbox-gl-native')"
