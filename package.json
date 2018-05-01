@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/springmeyer/travis-tests#readme",
   "dependencies": {
-    "@mapbox/mapbox-gl-native": "4.0.0-pre.3"
+    "@mapbox/mapbox-gl-native": "4.0.0-pre.2"
   }
 }
