@@ -15,7 +15,7 @@ matrix:
       node_js: 4
       dist: xenial
       before_install:
-        - sudo apt-get install -y libstdc++6 libgles2-mesa libegl1-mesa
+        - sudo apt-get install -y --allow-unauthenticated libstdc++6 libgles2-mesa libegl1-mesa
 
 install:
  - npm install
