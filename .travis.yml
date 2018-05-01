@@ -2,17 +2,20 @@ language: node_js
 
 matrix:
   include:
-     # Clang tidy build
     - os: linux
       sudo: false
       node_js: 4
       dist: trusty
-
-# enable c++11/14 builds
-addons:
-  apt:
-    sources: [ 'ubuntu-toolchain-r-test' ]
-    packages: [ 'libstdc++6', 'libgles2-mesa', 'libegl1-mesa' ]
+      addons:
+        apt:
+          sources: [ 'ubuntu-toolchain-r-test' ]
+          packages: [ 'libstdc++6', 'libgles2-mesa', 'libegl1-mesa' ]
+    - os: linux
+      sudo: required
+      node_js: 4
+      dist: xenial
+      before_install:
+        - apt-get install -y libstdc++6 libgles2-mesa libegl1-mesa
 
 install:
  - npm install
